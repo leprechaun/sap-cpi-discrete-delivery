@@ -14,7 +14,7 @@ jobs:
         with:
           java-version: '8'
           distribution: 'temurin'
-      - name: 'Local unit test with Maven'
+      - name: 'Run tests with Gradle'
         run: |
           cd artifacts/HelloWorld/Main/
 
