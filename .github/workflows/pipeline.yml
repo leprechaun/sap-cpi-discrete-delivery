@@ -37,6 +37,7 @@ jobs:
           oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
           dir-artifact-relative: artifacts/HelloWorld/
           package-id: HelloWorld
+          artifact-id: HelloWorld.TestintegrationFlow
 
   # Deploy to runtime
   deploy:
