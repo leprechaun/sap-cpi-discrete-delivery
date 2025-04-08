@@ -55,4 +55,4 @@ jobs:
           oauth-host: f69313cftrial.authentication.ap21.hana.ondemand.com
           oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
           oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
-          artifact-ids: HelloWorld.TestintegrationFlow
+          artifact-ids: Main
