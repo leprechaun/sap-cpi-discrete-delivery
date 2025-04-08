@@ -4,5 +4,6 @@ PACKAGE_ID="HelloWorld"
 
 mkdir -p "$(pwd)/artifacts/${PACKAGE_ID}"
 ARTIFACTS_DIR="$(pwd)/artifacts/${PACKAGE_ID}"
+DRAFT_HANDLING="ADD"
 
-./auto/flashpipe sync --config ./flashpipe.yaml --package-id "${PACKAGE_ID}" --dir-git-repo "$(pwd)/" --dir-artifacts "${ARTIFACTS_DIR}" --target tenant --debug
+./auto/flashpipe sync --config ./flashpipe.yaml --package-id "${PACKAGE_ID}" --draft-handling "${DRAFT_HANDLING}" --dir-git-repo "$(pwd)/" --dir-artifacts "${ARTIFACTS_DIR}" --target tenant --debug
