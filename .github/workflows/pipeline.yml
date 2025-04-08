@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: 'Upload ALL THINGS in HelloWorld'
+      - name: 'Upload HelloWorld IntegrationFlows'
         uses: engswee/flashpipe-action/update/artifact@v1
         with:
           tmn-host: f69313cftrial.it-cpitrial03.cfapps.ap21.hana.ondemand.com
@@ -38,6 +38,25 @@ jobs:
           dir-artifact-relative: artifacts/HelloWorld/HelloWorld.TestintegrationFlow
           package-id: HelloWorld
           artifact-id: HelloWorld.TestintegrationFlow
+
+# Update designtime
+  upload-package:
+    runs-on: ubuntu-latest
+    needs: tests
+    container:
+      image: engswee/flashpipe:latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 'Upload all of the HelloWorld package'
+        uses: engswee/flashpipe-action/update/package@v1
+        with:
+          tmn-host: f69313cftrial.it-cpitrial03.cfapps.ap21.hana.ondemand.com
+          oauth-host: f69313cftrial.authentication.ap21.hana.ondemand.com
+          oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
+          oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
+          package-file-relative: artifacts/HelloWorld
+          debug: true
 
   # Deploy to runtime
   deploy:
