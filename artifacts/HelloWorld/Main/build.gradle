@@ -1,0 +1,70 @@
+plugins {
+    id "groovy"
+}
+
+group = "org.fscker"
+version = "0.0.1"
+description = "SAP CPI Groovy Scripts"
+
+// SAP CPI uses Java version 1.8.0_441.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+repositories {
+    // Spock releases are available from Maven Central
+    mavenCentral()
+    // Spock snapshots are available from the Sonatype OSS snapshot repository
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    // Spock snapshots are available from the Sonatype OSS snapshot repository
+    maven { url "https://gitlab.com/api/v4/groups/12926885/-/packages/maven" }
+}
+
+ext {
+    // Note, SAP CPI uses version 2.4.21 of groovy, but we need to use 2.5 to make use of
+    // the Spock testing framework
+    groovyVersion = "2.5.23"
+    groovyMajorVersion = "2.5"
+}
+
+dependencies {
+    // SAP dependencies
+    //implementation "com.sap.cloud.script:script.api:2.15.0"
+    //implementation "com.sap.cloud.adk:adapter.api:2.31.0"
+// If we want to use SAP core sdk, we must use at least Java version 17
+//    implementation "com.sap.ai.sdk:core:1.3.0"
+
+    testImplementation("com.equaliseit:sap-cpi-mocks:1.0.2")
+
+    // Script dependencies
+    implementation("commons-io:commons-io:2.18.0")
+    implementation 'org.json:json:20250107'
+    implementation "javax.mail:mail:1.4.7"
+    implementation "org.codehaus.groovy:groovy-json:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
+
+
+    // mandatory dependencies for using Spock
+    implementation platform("org.codehaus.groovy:groovy-bom:$groovyVersion")
+    implementation "org.codehaus.groovy:groovy:$groovyVersion"
+    testImplementation platform("org.spockframework:spock-bom:1.2-groovy-$groovyMajorVersion")
+
+    testImplementation "org.spockframework:spock-core:1.0-groovy-$groovyMajorVersion"
+    testImplementation "org.spockframework:spock-junit4:2.4-M5-groovy-2.5"// you can remove this if your code does not rely on old JUnit 4 rules
+
+    // optional dependencies for using Spock
+    testImplementation "org.hamcrest:hamcrest-core:3.0"   // only necessary if Hamcrest matchers are used
+    testRuntimeOnly "net.bytebuddy:byte-buddy:1.17.0" // allows mocking of classes (in addition to interfaces)
+    testRuntimeOnly "org.objenesis:objenesis:3.4"      // allows mocking of classes without default constructor (together with ByteBuddy or CGLIB)
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+        showStandardStreams = true // Show stdout and stderr
+    }
+}
