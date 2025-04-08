@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+PACKAGE_ID="HelloWorld"
+
+mkdir -p "$(pwd)/artifacts/${PACKAGE_ID}"
+ARTIFACTS_DIR="$(pwd)/artifacts/${PACKAGE_ID}"
+
+./auto/flashpipe sync --config ./flashpipe.yaml --package-id "${PACKAGE_ID}" --dir-git-repo "$(pwd)/" --dir-artifacts "${ARTIFACTS_DIR}" --target tenant --debug

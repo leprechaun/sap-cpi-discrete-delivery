@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+FLASHPIPE_IMAGE="engswee/flashpipe"
+RUN_AS_USER="$(id -u):$(id -g)"
+
+docker run --rm -u "${RUN_AS_USER}" --workdir "$(pwd)" -v "$(pwd):/$(pwd)/" "${FLASHPIPE_IMAGE}" flashpipe "${@}"
