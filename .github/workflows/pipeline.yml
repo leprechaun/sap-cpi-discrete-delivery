@@ -15,9 +15,10 @@ jobs:
           java-version: '8'
           distribution: 'temurin'
       - name: 'Local unit test with Maven'
-        #run: mvn clean test
         run: |
-          echo "It's all green! well done"
+          cd artifacts/HelloWorld/Main/
+
+          ./gradlew clean test
 
 # Update designtime
   upload:
