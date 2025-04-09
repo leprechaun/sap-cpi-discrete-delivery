@@ -29,6 +29,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Lets try this first because we can sync across all artifacts later
+      # the alternative is to use update artifact and specify the prop file
+      # but we would have to update each artifact individually
+      - name: 'Overwrite default parameters w/ ENV specific ones'
+        run: |
+          cd packages/HelloWorld/
+          mv Main/src/main/resources/parameters.DEV.prop Main/src/main/resources/parameters.prop
+          cat Main/src/main/resources/parameters.prop
+
       - name: 'Upload all of HelloWorld using sync'
         uses: engswee/flashpipe-action/sync@v1
         with:
