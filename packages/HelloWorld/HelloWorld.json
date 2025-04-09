@@ -8,7 +8,7 @@
     "Vendor": "org.fscker",
     "Mode": "EDIT_ALLOWED",
     "Products": "wut-product",
-    "Keywords": "wut-keyword",
+    "Keywords": "wut-keyword,wut-keyword2",
     "Countries": "wut-country-region",
     "Industries": "wut-industry",
     "LineOfBusiness": "wut-lob"
