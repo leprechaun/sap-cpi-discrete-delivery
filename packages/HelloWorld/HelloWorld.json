@@ -6,6 +6,11 @@
     "ShortText": "This does stuff, like integrate and other things.",
     "Version": "0.0.2",
     "Vendor": "org.fscker",
-    "Mode": "EDIT_ALLOWED"
+    "Mode": "EDIT_ALLOWED",
+    "Products": "wut-product",
+    "Keywords": "wut-keyword",
+    "Countries": "wut-country-region",
+    "Industries": "wut-industry",
+    "LineOfBusiness": "wut-lob"
   }
 }
