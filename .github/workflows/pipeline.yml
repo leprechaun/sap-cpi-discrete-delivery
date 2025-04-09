@@ -16,7 +16,7 @@ jobs:
           distribution: 'temurin'
       - name: 'Run tests with Gradle'
         run: |
-          cd artifacts/HelloWorld/Main/
+          cd packages/HelloWorld/Main/
 
           ./gradlew clean test
 
@@ -37,7 +37,7 @@ jobs:
           oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
           oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
           target: tenant
-          dir-artifacts-relative: artifacts/HelloWorld/
+          dir-artifacts-relative: packages/HelloWorld/
           package-id: HelloWorld
 
   # Deploy to runtime

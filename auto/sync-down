@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 PACKAGE_ID="HelloWorld"
-mkdir -p "$(pwd)/artifacts/${PACKAGE_ID}"
-ARTIFACTS_DIR="$(pwd)/artifacts/${PACKAGE_ID}"
+mkdir -p "$(pwd)/packages/${PACKAGE_ID}"
+ARTIFACTS_DIR="$(pwd)/packages/${PACKAGE_ID}"
 DRAFT_HANDLING="SKIP"
 
 
