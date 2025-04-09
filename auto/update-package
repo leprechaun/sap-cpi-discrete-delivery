@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+PACKAGE_ID="HelloWorld"
+
+mkdir -p "$(pwd)/packages/${PACKAGE_ID}"
+ARTIFACTS_DIR="$(pwd)/packages/${PACKAGE_ID}"
+
+./auto/flashpipe update package --config ./flashpipe.yaml --package-file "${ARTIFACTS_DIR}/${PACKAGE_ID}.json" --debug
