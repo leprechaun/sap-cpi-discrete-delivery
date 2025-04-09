@@ -4,7 +4,7 @@
     "Name": "HelloWorld",
     "Description": "\u003cp\u003e\u003c/p\u003e",
     "ShortText": "This does stuff, like integrate and other things.",
-    "Version": "0.0.2",
+    "Version": "0.1.2",
     "Vendor": "org.fscker",
     "Mode": "EDIT_ALLOWED",
     "Products": "wut-product",

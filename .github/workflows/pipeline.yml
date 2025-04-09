@@ -40,6 +40,30 @@ jobs:
           dir-artifacts-relative: packages/HelloWorld/
           package-id: HelloWorld
 
+      - name: 'Bump package version'
+        run: |
+          apt-get update
+          apt-get install -y jq
+
+          cd packages/HelloWorld/
+
+          VERSION="$(cat HelloWorld.json | jq -r .d.Version)"
+          MAJOR_MINOR="$(echo $VERSION | cut -d'.' -f1,2)"
+          NEW_VERSION="${MAJOR_MINOR}.${{ github.run_number }}"
+
+          cat HelloWorld.json | jq ".d.Version = \"$NEW_VERSION\"" > package.json
+
+          cat package.json
+
+      - name: Update the package metadata
+        uses: engswee/flashpipe-action/update/package@v1
+        with:
+          tmn-host: f69313cftrial.it-cpitrial03.cfapps.ap21.hana.ondemand.com
+          oauth-host: f69313cftrial.authentication.ap21.hana.ondemand.com
+          oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
+          oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
+          package-file-relative: packages/HelloWorld/package.json
+
   # Deploy to runtime
   deploy:
     runs-on: ubuntu-latest
