@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+PACKAGE_ID="HelloWorld"
+ARTIFACT="Main"
+
+mkdir -p "$(pwd)/packages/${PACKAGE_ID}"
+ARTIFACTS_DIR="$(pwd)/packages/${PACKAGE_ID}"
+PROP_FILE="${ARTIFACTS_DIR}/${ARTIFACT}/src/main/resources/parameters.DEV.prop"
+
+./auto/flashpipe update artifact --config ./flashpipe.yaml --package-id $PACKAGE_ID --artifact-id $ARTIFACT --dir-artifact "${ARTIFACTS_DIR}/${ARTIFACT}" --debug --file-param $PROP_FILE
