@@ -1,4 +1,4 @@
-# SAP-CPI-Discreet-Delivery
+# SAP-CPI-Discrete-Delivery
 
 > Discrete, as opposed to continuous.
 

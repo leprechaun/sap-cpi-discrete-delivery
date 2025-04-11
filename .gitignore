@@ -1,5 +1,4 @@
 flashpipe.yaml
-*.hurl
 *.vars
 .gradle
 gradle
