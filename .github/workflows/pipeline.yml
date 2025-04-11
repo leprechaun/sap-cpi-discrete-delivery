@@ -21,7 +21,7 @@ jobs:
           ./gradlew clean test
 
 # Update designtime
-  upload:
+  upload-helloworld-main:
     runs-on: ubuntu-latest
     needs: tests
     container:
@@ -29,54 +29,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Lets try this first because we can sync across all artifacts later
-      # the alternative is to use update artifact and specify the prop file
-      # but we would have to update each artifact individually
-      - name: 'Overwrite default parameters w/ ENV specific ones'
-        run: |
-          cd packages/HelloWorld/
-          mv Main/src/main/resources/parameters.DEV.prop Main/src/main/resources/parameters.prop
-          cat Main/src/main/resources/parameters.prop
-
-      - name: 'Upload all of HelloWorld using sync'
-        uses: engswee/flashpipe-action/sync@v1
+      - name: 'Upload HelloWorld/Main'
+        uses: engswee/flashpipe-action/update/artifact@v1
         with:
           tmn-host: f69313cftrial.it-cpitrial03.cfapps.ap21.hana.ondemand.com
           oauth-host: f69313cftrial.authentication.ap21.hana.ondemand.com
           oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
           oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
-          target: tenant
-          dir-artifacts-relative: packages/HelloWorld/
+          dir-artifact-relative: packages/HelloWorld/Main/
           package-id: HelloWorld
-
-      - name: 'Bump package version'
-        run: |
-          apt-get update
-          apt-get install -y jq
-
-          cd packages/HelloWorld/
-
-          VERSION="$(cat HelloWorld.json | jq -r .d.Version)"
-          MAJOR_MINOR="$(echo $VERSION | cut -d'.' -f1,2)"
-          NEW_VERSION="${MAJOR_MINOR}.${{ github.run_number }}"
-
-          cat HelloWorld.json | jq ".d.Version = \"$NEW_VERSION\"" > package.json
-
-          cat package.json
-
-      - name: Update the package metadata
-        uses: engswee/flashpipe-action/update/package@v1
-        with:
-          tmn-host: f69313cftrial.it-cpitrial03.cfapps.ap21.hana.ondemand.com
-          oauth-host: f69313cftrial.authentication.ap21.hana.ondemand.com
-          oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
-          oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
-          package-file-relative: packages/HelloWorld/package.json
+          artifact-id: Main
+          file-param: packages/HelloWorld/Main/src/main/resources/parameters.DEV.prop
 
   # Deploy to runtime
-  deploy:
+  deploy-helloworld-main:
     runs-on: ubuntu-latest
-    needs: upload
+    needs: upload-helloworld-main
     container:
       image: engswee/flashpipe:latest
     steps:
