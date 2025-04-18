@@ -28,4 +28,4 @@ On every push, the pipeline will
 - Draft handling?
   - should we pull in drafts or not?
   - should we push drafts of not?
-    - this might not be relevant if we use `update artifact`.
+    - this might not be relevant if we use `update artifact`
