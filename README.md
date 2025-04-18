@@ -29,3 +29,6 @@ On every push, the pipeline will
   - should we pull in drafts or not?
   - should we push drafts of not?
     - this might not be relevant if we use `update artifact`
+- Re-creating the package and artifact after my trial tenant was deleted reset the version numbers
+  - there could be potential mismatch between the version numbers of different environments, leading to confusion
+    - we might need to be explicit about versions, and systematically update
