@@ -217,7 +217,7 @@
                 </ifl:property>
                 <ifl:property>
                     <key>script</key>
-                    <value>dosomething.groovy</value>
+                    <value>doanotherthing.groovy</value>
                 </ifl:property>
             </bpmn2:extensionElements>
             <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>

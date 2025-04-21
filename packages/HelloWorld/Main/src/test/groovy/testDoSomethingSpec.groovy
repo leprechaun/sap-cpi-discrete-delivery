@@ -15,7 +15,7 @@ class DoSomethingSpec extends Specification {
     def setupSpec() {
         GroovyShell shell = new GroovyShell()
         script = shell.parse(
-            new File(this.getClass().getResource('/script/dosomething.groovy').getFile())
+            new File(this.getClass().getResource('/script/doanotherthing.groovy').getFile())
         )
     }
 
