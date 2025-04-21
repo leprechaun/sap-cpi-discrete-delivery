@@ -29,6 +29,39 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: "Install JQ & YQ"
+        run: |
+          apt-get update
+          apt-get install -y jq wget curl
+
+      - name: Install YQ
+        run: |
+          export VERSION=v4.2.0
+          export BINARY=yq_linux_amd64
+
+          wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}.tar.gz -O - | tar xz && mv ${BINARY} /usr/bin/yq
+
+      - name: Install HURL
+        run: |
+
+          curl --location --remote-name https://github.com/Orange-OpenSource/hurl/releases/download/6.1.1/hurl_6.1.1_amd64.deb
+          dpkg -i hurl_6.1.1_amd64.deb
+
+      - name: Check versions of the Artifact
+        run: |
+          export LOCAL_VERSION="$(cat packages/HelloWorld/Main/META-INF/MANIFEST.MF | yq -r '."Bundle-Version"'")
+
+          hurl \
+            --variable API_HOST=f69313cftrial.it-cpitrial03.cfapps.ap21.hana.ondemand.com \
+            --variable OAUTH_HOST=f69313cftrial.authentication.ap21.hana.ondemand.com \
+            --variable OAUTH_CLIENT_ID="${{ secrets.DEV_CLIENT_ID }}" \
+            --variable OAUTH_CLIENT_SECRET="${{ secrets.DEV_CLIENT_SECRET }}" \
+            api-usage/get-package-integration-artifact.hurl | jq -r .d.Version > /tmp/remote-version
+
+          REMOTE_VERSION="$(cat /tmp/remote-version)"
+
+          ./auto/compare-versions $LOCAL_VERSION $REMOTE_VERSION
+
       - name: 'Upload HelloWorld/Main'
         uses: engswee/flashpipe-action/update/artifact@v1
         with:

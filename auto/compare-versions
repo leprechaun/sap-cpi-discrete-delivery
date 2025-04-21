@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+compare-versions () {
+    if [[ $1 == $2 ]]
+    then
+        return 0
+    fi
+    local IFS=.
+    local i ver1=($1) ver2=($2)
+    # fill empty fields in ver1 with zeros
+    for ((i=${#ver1[@]}; i<${#ver2[@]}; i++))
+    do
+        ver1[i]=0
+    done
+    for ((i=0; i<${#ver1[@]}; i++))
+    do
+        if ((10#${ver1[i]:=0} > 10#${ver2[i]:=0}))
+        then
+            echo "$1 > $2"
+            return 1
+        fi
+        if ((10#${ver1[i]} < 10#${ver2[i]}))
+        then
+            echo "$1 < $2"
+            return 2
+        fi
+    done
+    return 0
+}
+
+if [ "$0" == './auto/compare-versions' ]; then
+    compare-versions $1 $2
+    exit $?
+fi
