@@ -43,7 +43,9 @@ jobs:
 
           REMOTE_VERSION="$(cat /tmp/remote-version)"
 
-          ./auto/compare-versions $LOCAL_VERSION $REMOTE_VERSION
+          source ./auto/compare-versions
+
+          compare-versions $LOCAL_VERSION $REMOTE_VERSION
 
 # Update designtime
   upload-helloworld-main:
