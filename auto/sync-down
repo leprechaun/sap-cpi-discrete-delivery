@@ -6,7 +6,7 @@ ARTIFACTS_DIR="$(pwd)/packages/${PACKAGE_ID}"
 
 # SKIP: will refuse to update local files from artifacts in a draft state
 # ADD: will overwrite local files with whatever is in CPI even if it is in draft state
-DRAFT_HANDLING="SKIP"
+DRAFT_HANDLING="ADD"
 
 
 ./auto/flashpipe sync --config ./flashpipe.yaml --package-id "${PACKAGE_ID}" --draft-handling "${DRAFT_HANDLING}" --dir-git-repo "$(pwd)/" --dir-artifacts "${ARTIFACTS_DIR}" --target git --debug --sync-package-details
