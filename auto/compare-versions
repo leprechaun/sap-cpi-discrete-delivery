@@ -55,8 +55,3 @@ fail-if-first-version-is-lesser-or-equal() {
     done
     return 1
 }
-
-if [ "$0" == './auto/compare-versions' ]; then
-    compare-versions $1 $2
-    exit $?
-fi
