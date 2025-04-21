@@ -31,11 +31,8 @@ jobs:
 
       - name: Check versions of the Artifact
         run: |
-          cat packages/HelloWorld/Main/META-INF/MANIFEST.MF
           # This technically isn't a YAML file, but it does happen to work
-          set -x
           export LOCAL_VERSION="$(cat packages/HelloWorld/Main/META-INF/MANIFEST.MF | yq -r '."Bundle-Version"')"
-          set +x
 
           hurl \
             --variable API_HOST=f69313cftrial.it-cpitrial03.cfapps.ap21.hana.ondemand.com \
@@ -45,6 +42,9 @@ jobs:
             api-usage/get-package-integration-artifact.hurl | yq -r '.d.Version' > /tmp/remote-version
 
           REMOTE_VERSION="$(cat /tmp/remote-version)"
+
+          echo "Remote: $REMOTE_VERSION"
+          echo "Local: $LOCAL_VERSION"
 
           source ./auto/compare-versions
 
