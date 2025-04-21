@@ -37,8 +37,8 @@ jobs:
           hurl \
             --variable API_HOST=f69313cftrial.it-cpitrial03.cfapps.ap21.hana.ondemand.com \
             --variable OAUTH_HOST=f69313cftrial.authentication.ap21.hana.ondemand.com \
-            --variable OAUTH_CLIENT_ID="${{ secrets.DEV_CLIENT_ID }}" \
-            --variable OAUTH_CLIENT_SECRET="${{ secrets.DEV_CLIENT_SECRET }}" \
+            --variable 'OAUTH_CLIENT_ID=${{ secrets.DEV_CLIENT_ID }}' \
+            --variable 'OAUTH_CLIENT_SECRET=${{ secrets.DEV_CLIENT_SECRET }}' \
             api-usage/get-package-integration-artifact.hurl | yq -r '.d.Version' > /tmp/remote-version
 
           REMOTE_VERSION="$(cat /tmp/remote-version)"
