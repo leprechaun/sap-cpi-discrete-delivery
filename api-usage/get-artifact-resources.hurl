@@ -11,6 +11,6 @@ header "Content-Type" contains "json"
 [Captures]
 apikey: jsonpath "$['access_token']"
 
-GET https://{{API_HOST}}/api/v1/IntegrationDesigntimeArtifacts(Id='Main',Version='active')
+GET https://{{API_HOST}}/api/v1/IntegrationDesigntimeArtifacts(Id='Main',Version='active')/Resources
 Accept: application/json
 Authorization: Bearer {{apikey}}
