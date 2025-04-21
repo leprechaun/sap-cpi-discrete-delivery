@@ -39,13 +39,18 @@ jobs:
           export VERSION=v4.2.0
           export BINARY=yq_linux_amd64
 
-          wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}.tar.gz -O - | tar xz && mv ${BINARY} /usr/bin/yq
+          curl --location --rename-name https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}
+          mv ${BINARY} /usr/local/bin/yq
+          chmod 755 /usr/local/bin/yq
 
       - name: Install HURL
         run: |
+          curl --location --rename-name https://github.com/Orange-OpenSource/hurl/releases/download/6.1.1/hurl-6.1.1-x86_64-unknown-linux-gnu.tar.gz
+          tar xfv hurl-6.1.1-x86_64-unknown-linux-gnu.tar.gz
 
-          curl --location --remote-name https://github.com/Orange-OpenSource/hurl/releases/download/6.1.1/hurl_6.1.1_amd64.deb
-          dpkg -i hurl_6.1.1_amd64.deb
+          mv hurl-6.1.0-x86_64-unknown-linux-gnu/bin/hurl /usr/local/bin/
+          chmod 755 /usr/local/bin/hurl
+
 
       - name: Check versions of the Artifact
         run: |
