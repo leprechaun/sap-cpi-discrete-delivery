@@ -34,7 +34,7 @@ jobs:
           cat packages/HelloWorld/Main/META-INF/MANIFEST.MF
           # This technically isn't a YAML file, but it does happen to work
           set -x
-          export LOCAL_VERSION="$(cat packages/HelloWorld/Main/META-INF/MANIFEST.MF | yq -r '.\"Bundle-Version\"')"
+          export LOCAL_VERSION="$(cat packages/HelloWorld/Main/META-INF/MANIFEST.MF | yq -r '."Bundle-Version"')"
           set +x
 
           hurl \

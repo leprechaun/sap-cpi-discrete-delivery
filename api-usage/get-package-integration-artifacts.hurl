@@ -14,3 +14,4 @@ apikey: jsonpath "$['access_token']"
 
 GET https://{{API_HOST}}/api/v1/IntegrationPackages('HelloWorld')/IntegrationDesigntimeArtifacts
 Authorization: Bearer {{apikey}}
+Accept: application/json
