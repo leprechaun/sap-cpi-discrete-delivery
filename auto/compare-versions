@@ -31,6 +31,7 @@ compare-versions () {
 fail-if-first-version-is-lesser-or-equal() {
     if [[ $1 == $2 ]]
     then
+        echo "both equal: $1 = $2"
         return 1
     fi
     local IFS=.
