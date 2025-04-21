@@ -3,14 +3,8 @@
     "Id": "HelloWorld",
     "Name": "HelloWorld",
     "Description": "\u003cp\u003e\u003c/p\u003e",
-    "ShortText": "This does stuff, like integrate and other things.",
-    "Version": "0.1.2",
-    "Vendor": "org.fscker",
-    "Mode": "EDIT_ALLOWED",
-    "Products": "wut-product",
-    "Keywords": "wut-keyword,wut-keyword2",
-    "Countries": "wut-country-region",
-    "Industries": "wut-industry",
-    "LineOfBusiness": "wut-lob"
+    "ShortText": "HelloWorld",
+    "Version": "1.0.0",
+    "Mode": "EDIT_ALLOWED"
   }
 }

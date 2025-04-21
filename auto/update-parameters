@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+while read line; do
+    if [ "${line:0:1}" != "#" ]; then
+        hurl --variables-file ./sap-personal.vars ./api-usage/update-configuration-item.hurl
+    fi
+done < $1
