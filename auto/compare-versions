@@ -28,6 +28,34 @@ compare-versions () {
     return 0
 }
 
+fail-if-first-version-is-lesser-or-equal() {
+    if [[ $1 == $2 ]]
+    then
+        return 1
+    fi
+    local IFS=.
+    local i ver1=($1) ver2=($2)
+    # fill empty fields in ver1 with zeros
+    for ((i=${#ver1[@]}; i<${#ver2[@]}; i++))
+    do
+        ver1[i]=0
+    done
+    for ((i=0; i<${#ver1[@]}; i++))
+    do
+        if ((10#${ver1[i]:=0} > 10#${ver2[i]:=0}))
+        then
+            echo "first is greater: $1 > $2"
+            return 1
+        fi
+        if ((10#${ver1[i]} < 10#${ver2[i]}))
+        then
+            echo "first is lesser: $1 < $2"
+            return 0
+        fi
+    done
+    return 1
+}
+
 if [ "$0" == './auto/compare-versions' ]; then
     compare-versions $1 $2
     exit $?
