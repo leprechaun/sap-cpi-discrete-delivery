@@ -24,17 +24,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: tests
     steps:
-      - name: "Install JQ & CURL"
-        run: |
-          apt-get update
-          apt-get install -y jq curl
-
       # Lazy: check the source then lock
       - uses: gacts/install-hurl@v1
       - uses: dcarbone/install-yq-action@v1
 
       - name: Check versions of the Artifact
         run: |
+          # This technically isn't a YAML file, but it does happen to work
           export LOCAL_VERSION="$(cat packages/HelloWorld/Main/META-INF/MANIFEST.MF | yq -r '.\"Bundle-Version\"')"
 
           hurl \
@@ -42,7 +38,7 @@ jobs:
             --variable OAUTH_HOST=f69313cftrial.authentication.ap21.hana.ondemand.com \
             --variable OAUTH_CLIENT_ID="${{ secrets.DEV_CLIENT_ID }}" \
             --variable OAUTH_CLIENT_SECRET="${{ secrets.DEV_CLIENT_SECRET }}" \
-            api-usage/get-package-integration-artifact.hurl | jq -r '.d.Version' > /tmp/remote-version
+            api-usage/get-package-integration-artifact.hurl | yq -r '.d.Version' > /tmp/remote-version
 
           REMOTE_VERSION="$(cat /tmp/remote-version)"
 
