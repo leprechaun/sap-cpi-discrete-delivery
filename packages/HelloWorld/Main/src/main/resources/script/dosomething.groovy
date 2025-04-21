@@ -11,6 +11,7 @@ def Message processData(Message message) {
     def myheader = message.getHeader("MyHeader", java.lang.String)
     message.setProperty("xProp", "asdasdasd")
     message.setProperty("xPropTwo", "qweqweqwe");
+    message.setProperty("xPropThree", "lkasjdflksjdflskj");
     message.setHeader("MyHeader", myheader.toUpperCase())
     return message;
 }
