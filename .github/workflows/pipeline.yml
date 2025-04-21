@@ -40,6 +40,7 @@ jobs:
           package-id: HelloWorld
           artifact-id: Main
           file-param: packages/HelloWorld/Main/src/main/resources/parameters.DEV.prop
+          debug: true
 
   # Deploy to runtime
   deploy-helloworld-main:
@@ -58,3 +59,4 @@ jobs:
           oauth-clientid: ${{ secrets.DEV_CLIENT_ID }}
           oauth-clientsecret: ${{ secrets.DEV_CLIENT_SECRET }}
           artifact-ids: Main
+          debug: true
