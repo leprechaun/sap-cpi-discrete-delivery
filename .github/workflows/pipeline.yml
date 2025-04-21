@@ -20,37 +20,18 @@ jobs:
 
           ./gradlew clean test
 
-# Update designtime
-  upload-helloworld-main:
+  check-version-prior-to-update:
     runs-on: ubuntu-latest
     needs: tests
-    container:
-      image: engswee/flashpipe:latest
     steps:
-      - uses: actions/checkout@v4
-
       - name: "Install JQ & CURL"
         run: |
           apt-get update
           apt-get install -y jq curl
 
-      - name: Install YQ
-        run: |
-          export VERSION=v4.2.0
-          export BINARY=yq_linux_amd64
-
-          curl --location --remote-name https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY}
-          mv ${BINARY} /usr/local/bin/yq
-          chmod 755 /usr/local/bin/yq
-
-      - name: Install HURL
-        run: |
-          curl --location --remote-name https://github.com/Orange-OpenSource/hurl/releases/download/6.1.1/hurl-6.1.1-x86_64-unknown-linux-gnu.tar.gz
-          tar xfv hurl-6.1.1-x86_64-unknown-linux-gnu.tar.gz
-
-          mv hurl-6.1.1-x86_64-unknown-linux-gnu/bin/hurl /usr/local/bin/
-          chmod 755 /usr/local/bin/hurl
-
+      # Lazy: check the source then lock
+      - uses: gacts/install-hurl@v1
+      - uses: dcarbone/install-yq-action@v1
 
       - name: Check versions of the Artifact
         run: |
@@ -66,6 +47,16 @@ jobs:
           REMOTE_VERSION="$(cat /tmp/remote-version)"
 
           ./auto/compare-versions $LOCAL_VERSION $REMOTE_VERSION
+
+# Update designtime
+  upload-helloworld-main:
+    runs-on: ubuntu-latest
+    needs: check-version-prior-to-update
+    container:
+      image: engswee/flashpipe:latest
+    steps:
+      - uses: actions/checkout@v4
+
 
       - name: 'Upload HelloWorld/Main'
         uses: engswee/flashpipe-action/update/artifact@v1
