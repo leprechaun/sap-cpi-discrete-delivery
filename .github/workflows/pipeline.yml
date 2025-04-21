@@ -48,7 +48,7 @@ jobs:
 
           source ./auto/compare-versions
 
-          fail-if-first-version-is-lesser-or-equal "$LOCAL_VERSION" "$REMOTE_VERSION"
+          fail-if-first-version-is-lesser-or-equal "$REMOTE_VERSION" "$LOCAL_VERSION"
 
 # Update designtime
   upload-helloworld-main:
