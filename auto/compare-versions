@@ -46,12 +46,12 @@ fail-if-first-version-is-lesser-or-equal() {
         if ((10#${ver1[i]:=0} > 10#${ver2[i]:=0}))
         then
             echo "first is greater: $1 > $2"
-            return 1
+            return 0
         fi
         if ((10#${ver1[i]} < 10#${ver2[i]}))
         then
             echo "first is lesser: $1 < $2"
-            return 0
+            return 1
         fi
     done
     return 1
