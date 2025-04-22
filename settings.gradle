@@ -1,3 +1,4 @@
 rootProject.name = 'sap-cpi-root'
 
 include 'packages:HelloWorld:Main'
+include 'packages:AnotherPackage:AnotherFlow'
