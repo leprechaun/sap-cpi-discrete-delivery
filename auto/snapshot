@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+DRAFT_HANDLING=ADD
+
+./auto/flashpipe --debug --config ./flashpipe.yaml snapshot --draft-handling ${DRAFT_HANDLING} --dir-artifacts ./packages/ --git-skip-commit --sync-package-details
