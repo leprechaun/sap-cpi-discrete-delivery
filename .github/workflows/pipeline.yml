@@ -16,8 +16,6 @@ jobs:
           distribution: 'temurin'
       - name: 'Run tests with Gradle'
         run: |
-          cd packages/HelloWorld/Main/
-
           ./gradlew clean test
 
   check-version-prior-to-update:

@@ -2,9 +2,9 @@ plugins {
     id "groovy"
 }
 
-group = "org.fscker.cpi.helloworld.main"
+group = "org.fscker.cpi"
 version = "0.0.1"
-description = "SAP CPI HelloWorld Main"
+description = ""
 
 // SAP CPI uses Java version 1.8.0_441.
 java {
