@@ -48,7 +48,10 @@ jobs:
 
           source ./auto/compare-versions
 
-          fail-if-first-version-is-lesser-or-equal "$LOCAL_VERSION" "$REMOTE_VERSION"
+          # fail-if-first-version-is-lesser-or-equal "$LOCAL_VERSION" "$REMOTE_VERSION"
+          # I'm actually okay overwriting my Flow ...
+          exit 0
+
 
 # Update designtime
   upload-helloworld-main:
