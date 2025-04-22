@@ -1,0 +1,10 @@
+{
+  "d": {
+    "Id": "AnotherPackage",
+    "Name": "AnotherPackage",
+    "Description": "\u003cp\u003e\u003c/p\u003e",
+    "ShortText": "This does not do any more valuable things than the other package.",
+    "Version": "0.0.1",
+    "Mode": "EDIT_ALLOWED"
+  }
+}
